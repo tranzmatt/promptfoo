@@ -42,7 +42,7 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@tsconfig/docusaurus": "^2.0.9",
-    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/coverage-v8": "^4.1.0",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "dedent": "^1.7.2",
@@ -50,13 +50,13 @@
     "framer-motion": "^12.34.3",
     "gray-matter": "^4.0.3",
     "jsdom": "^28.1.0",
-    "lucide-react": "^0.575.0",
+    "lucide-react": "^0.577.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "satori": "^0.25.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "optionalDependencies": {
     "sharp": "^0.34.5"
