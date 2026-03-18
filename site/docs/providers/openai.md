@@ -488,23 +488,25 @@ GPT-5.4 is a GPT-5 family model for complex professional work, agentic coding, a
 
 #### Available Models
 
-| Model                  | Description                   | Pricing (Input / Output)    |
-| ---------------------- | ----------------------------- | --------------------------- |
-| gpt-5.4                | Standard GPT-5.4 model        | $2.50 / $15 per 1M tokens   |
-| gpt-5.4-2026-03-05     | Dated snapshot of gpt-5.4     | $2.50 / $15 per 1M tokens   |
-| gpt-5.4-mini           | Lower-latency GPT-5.4 variant | $0.75 / $4.50 per 1M tokens |
-| gpt-5.4-nano           | Lowest-cost GPT-5.4 variant   | $0.20 / $1.25 per 1M tokens |
-| gpt-5.4-pro            | Premium GPT-5.4 pro model     | $30.00 / $180 per 1M tokens |
-| gpt-5.4-pro-2026-03-05 | Dated snapshot of gpt-5.4-pro | $30.00 / $180 per 1M tokens |
+| Model                   | Description                    | Pricing (Input / Output)    |
+| ----------------------- | ------------------------------ | --------------------------- |
+| gpt-5.4                 | Standard GPT-5.4 model         | $2.50 / $15 per 1M tokens   |
+| gpt-5.4-2026-03-05      | Dated snapshot of gpt-5.4      | $2.50 / $15 per 1M tokens   |
+| gpt-5.4-mini            | Lower-latency GPT-5.4 variant  | $0.75 / $4.50 per 1M tokens |
+| gpt-5.4-mini-2026-03-17 | Dated snapshot of gpt-5.4-mini | $0.75 / $4.50 per 1M tokens |
+| gpt-5.4-nano            | Lowest-cost GPT-5.4 variant    | $0.20 / $1.25 per 1M tokens |
+| gpt-5.4-nano-2026-03-17 | Dated snapshot of gpt-5.4-nano | $0.20 / $1.25 per 1M tokens |
+| gpt-5.4-pro             | Premium GPT-5.4 pro model      | $30.00 / $180 per 1M tokens |
+| gpt-5.4-pro-2026-03-05  | Dated snapshot of gpt-5.4-pro  | $30.00 / $180 per 1M tokens |
 
 #### Key Specifications
 
-- **Context window**: 1,050,000 tokens
-- **Max output tokens**: 128,000 tokens
+- **Context window**: `gpt-5.4` and `gpt-5.4-pro` use a 1,050,000-token window. `gpt-5.4-mini` and `gpt-5.4-nano` use a 400,000-token window.
+- **Max output tokens**: 128,000 tokens across the current GPT-5.4 family.
 - **Reasoning effort**: `gpt-5.4` supports `none`, `low`, `medium`, `high`, `xhigh`. `gpt-5.4-pro` supports `medium`, `high`, `xhigh`.
-- **Smaller variants**: `gpt-5.4-mini` and `gpt-5.4-nano` expose the same GPT-5.4 family controls with lower latency and lower cost.
-- **Endpoint support**: Chat Completions API, Responses API, and Codex SDK
-- **Cached input**: `gpt-5.4` cached input tokens $0.25 per 1M. `gpt-5.4-pro` has no cached-input discount.
+- **Variant focus**: `gpt-5.4-mini` is the lower-latency GPT-5.4 option for coding, tools, and sub-agents. `gpt-5.4-nano` is the lowest-cost GPT-5.4 option for high-volume extraction, ranking, and classification workloads.
+- **Endpoint support in promptfoo**: Chat Completions API and Responses API
+- **Cached input**: `gpt-5.4` cached input tokens cost $0.25 per 1M, `gpt-5.4-mini` costs $0.075 per 1M, `gpt-5.4-nano` costs $0.02 per 1M, and `gpt-5.4-pro` has no cached-input discount.
 
 #### Usage Examples
 
@@ -1784,7 +1786,9 @@ The Responses API supports a wide range of models, including:
 - `gpt-5.4` - GPT-5.4 model ($2.50/$15 per 1M tokens)
 - `gpt-5.4-2026-03-05` - Dated snapshot of gpt-5.4
 - `gpt-5.4-mini` - Lower-latency GPT-5.4 model ($0.75/$4.50 per 1M tokens)
+- `gpt-5.4-mini-2026-03-17` - Dated snapshot of gpt-5.4-mini
 - `gpt-5.4-nano` - Lowest-cost GPT-5.4 model ($0.20/$1.25 per 1M tokens)
+- `gpt-5.4-nano-2026-03-17` - Dated snapshot of gpt-5.4-nano
 - `gpt-5.4-pro` - Premium GPT-5.4 model ($30/$180 per 1M tokens)
 - `gpt-5.4-pro-2026-03-05` - Dated snapshot of gpt-5.4-pro
 - `gpt-5` - Earlier GPT-5 family model

@@ -22,6 +22,18 @@ describe('calculateAzureCost', () => {
     expect(typeof cost).toBe('number');
   });
 
+  it('calculates cost for dated GPT-5.4 mini snapshots', () => {
+    const cost = calculateAzureCost('gpt-5.4-mini-2026-03-17', {}, 100, 50);
+    expect(cost).toBeDefined();
+    expect(typeof cost).toBe('number');
+  });
+
+  it('calculates cost for dated GPT-5.4 nano snapshots', () => {
+    const cost = calculateAzureCost('gpt-5.4-nano-2026-03-17', {}, 100, 50);
+    expect(cost).toBeDefined();
+    expect(typeof cost).toBe('number');
+  });
+
   it('returns undefined for unknown model', () => {
     const cost = calculateAzureCost('unknown-model', {}, 100, 50);
     expect(cost).toBeUndefined();

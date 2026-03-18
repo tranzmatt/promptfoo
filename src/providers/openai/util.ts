@@ -346,14 +346,14 @@ export const OPENAI_CHAT_MODELS = [
       output: 15 / 1e6,
     },
   })),
-  ...['gpt-5.4-mini'].map((model) => ({
+  ...['gpt-5.4-mini', 'gpt-5.4-mini-2026-03-17'].map((model) => ({
     id: model,
     cost: {
       input: 0.75 / 1e6,
       output: 4.5 / 1e6,
     },
   })),
-  ...['gpt-5.4-nano'].map((model) => ({
+  ...['gpt-5.4-nano', 'gpt-5.4-nano-2026-03-17'].map((model) => ({
     id: model,
     cost: {
       input: 0.2 / 1e6,
