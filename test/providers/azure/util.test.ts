@@ -13,7 +13,7 @@ describe('throwConfigurationError', () => {
 describe('calculateAzureCost', () => {
   it('calculates cost for valid model and tokens', () => {
     const cost = calculateAzureCost(
-      'gpt-4',
+      'gpt-5.4',
       {},
       100, // prompt tokens
       50, // completion tokens
