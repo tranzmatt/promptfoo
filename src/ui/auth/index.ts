@@ -6,6 +6,7 @@
  * the runner functions when needed.
  */
 export {
+  AUTH_CANCELLED,
   type AuthRunnerOptions,
   type AuthUIResult,
   initInkAuth,

@@ -12,6 +12,9 @@ export { shouldUseInkUI as shouldUseInkAuth } from '../interactiveCheck';
 import type { RenderResult } from '../render';
 import type { AuthController, TeamInfo, UserInfo } from './AuthApp';
 
+/** Sentinel value resolved by signal handlers to indicate Ctrl+C cancellation */
+export const AUTH_CANCELLED = Symbol('AUTH_CANCELLED');
+
 export interface AuthRunnerOptions {
   /** Initial phase to start with */
   initialPhase?: 'idle' | 'logging_in';
@@ -24,10 +27,10 @@ export interface AuthUIResult {
   controller: AuthController;
   /** Cleanup function */
   cleanup: () => void;
-  /** Promise that resolves when a team is selected (or undefined if no selection needed) */
-  teamSelection: Promise<TeamInfo | undefined>;
-  /** Promise that resolves when auth completes */
-  result: Promise<UserInfo | undefined>;
+  /** Promise that resolves when a team is selected, undefined if Esc, or AUTH_CANCELLED on Ctrl+C */
+  teamSelection: Promise<TeamInfo | undefined | typeof AUTH_CANCELLED>;
+  /** Promise that resolves when auth completes, or AUTH_CANCELLED on Ctrl+C */
+  result: Promise<UserInfo | undefined | typeof AUTH_CANCELLED>;
 }
 
 /**
@@ -46,8 +49,10 @@ export async function initInkAuth(options: AuthRunnerOptions = {}): Promise<Auth
     componentName: 'AuthApp',
     controller: undefined,
     channels: {
-      teamSelection: undefined,
-      result: undefined,
+      // Signal (Ctrl+C) resolves with AUTH_CANCELLED sentinel so auth.ts can
+      // distinguish cancellation from normal "no selection needed" (undefined)
+      teamSelection: AUTH_CANCELLED,
+      result: AUTH_CANCELLED,
     },
     signalContext: 'auth',
     render: (resolvers) =>
@@ -79,8 +84,8 @@ export async function initInkAuth(options: AuthRunnerOptions = {}): Promise<Auth
     renderResult,
     controller: resolvedController,
     cleanup,
-    teamSelection: promises.teamSelection as Promise<TeamInfo | undefined>,
-    result: promises.result as Promise<UserInfo | undefined>,
+    teamSelection: promises.teamSelection as Promise<TeamInfo | undefined | typeof AUTH_CANCELLED>,
+    result: promises.result as Promise<UserInfo | undefined | typeof AUTH_CANCELLED>,
   };
 }
 

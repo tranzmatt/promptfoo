@@ -5,7 +5,7 @@ import { isNonInteractive } from '../envars';
 import { getUserEmail, setUserEmail } from '../globalConfig/accounts';
 import { cloudConfig } from '../globalConfig/cloud';
 import logger from '../logger';
-import { initInkAuth, shouldUseInkAuth, type TeamInfo } from '../ui/auth';
+import { AUTH_CANCELLED, initInkAuth, shouldUseInkAuth, type TeamInfo } from '../ui/auth';
 import {
   canCreateTargets,
   getDefaultTeam,
@@ -138,11 +138,15 @@ export function authCommand(program: Command) {
 
                   // Wait for team selection
                   const selectedTeam = await authUI.teamSelection;
-                  if (selectedTeam) {
+                  if (selectedTeam === AUTH_CANCELLED) {
+                    // Ctrl+C: abort login entirely
+                    logger.info('Login cancelled.');
+                    return;
+                  } else if (selectedTeam) {
                     cloudConfig.setCurrentTeamId(selectedTeam.id, result.organization.id);
                     selectedTeamName = selectedTeam.name;
                   } else {
-                    // User cancelled or closed - use default
+                    // Esc: use default team (canonical default by creation date)
                     const defaultTeam = await getDefaultTeam();
                     cloudConfig.setCurrentTeamId(defaultTeam.id, result.organization.id);
                     selectedTeamName = defaultTeam.name;

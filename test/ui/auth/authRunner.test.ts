@@ -111,9 +111,11 @@ describe('authRunner', () => {
       const call = vi.mocked(initInkApp).mock.calls[0][0];
       expect(call.componentName).toBe('AuthApp');
       expect(call.signalContext).toBe('auth');
+      // Channels use AUTH_CANCELLED sentinel as fallback for signal handling
+      const { AUTH_CANCELLED } = await import('../../../src/ui/auth/authRunner');
       expect(call.channels).toEqual({
-        teamSelection: undefined,
-        result: undefined,
+        teamSelection: AUTH_CANCELLED,
+        result: AUTH_CANCELLED,
       });
     });
   });
